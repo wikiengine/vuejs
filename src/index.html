@@ -1,5 +1,7 @@
 <div class="Vuejs"></div>
 <script type="module" src="./main.js"></script>
 <script>
-    window.contentHtml = "<%=contentHtml%>"
+    const parser = new DOMParser();
+    const doc = parser.parseFromString("<%=contentHtml%>", "text/html");
+    window.contentHtml = doc.documentElement.textContent;
 </script>
