@@ -1,27 +1,13 @@
 <template>
-  <header>
-    <nav>
-      <a href="/">{{ window.CONFIG.logo_text }}</a>
-    </nav>
-  </header>
-  <main>
-    <div v-html="window.contentHtml"></div>
-  </main>
-  <footer>
-    <p>{{ window.CONFIG.copyright_text }}</p>
-    <a href="//testwiki.hyonsu.com">the tree</a>
-  </footer>
+	<nav>
+		<a href="/">{{ CONFIG.logo_text }}</a>
+		<a href="/RecentChanges">최근 변경</a>
+		<a href="/RecentDiscuss">최근 토론</a>
+	</nav>
+	<main>
+		<div v-html="{{ contentHtml }}"/>
+	</main>
+	<footer>
+		<a href="//testwiki.hyonsu.com">the tree</a>
+	</footer>
 </template>
-
-<style scoped>
-header {
-  height: 64px;
-  background-color: blue;
-}
-nav {
-  display: flex;
-}
-main {
-  margin: 5px;
-}
-</style>
