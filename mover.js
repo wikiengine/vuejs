@@ -1,16 +1,26 @@
-import { promises as fs } from "fs"; // fs.promises 사용
-import chalk from "chalk";  
+import { promises as fs } from "fs";
+import path from "path";
+import chalk from "chalk";
 
-const html = "index.html"; 
-const ejs = "layout.ejs";  
+//원본
+const html = "index.html";
+//ejs
+const ejs = "layout.ejs";
 
-async function renameFile() {
+async function modifyAndRenameFile() {
   try {
-    await fs.rename(html, ejs);  // fs.promises.rename로 변경
+    let data = await fs.readFile(html, "utf8");
+
+    data = data.replace(/(src|href)=["'](\/assets\/)/g, '$1="/skins/vuejs$2');
+
+    await fs.writeFile(html, data, "utf8");
+    console.log(`${chalk.green("✔")} HTML 수정 성공`);
+
+    await fs.rename(html, ejs);
     console.log(`${chalk.green("✔")} 확장자 변경 성공`);
   } catch (error) {
-    console.log(`${chalk.red("✘")} 확장자 변경 실패: ${error}`);
+    console.log(`${chalk.red("✘")} 작업 실패: ${error}`);
   }
 }
 
-renameFile();
+modifyAndRenameFile();
